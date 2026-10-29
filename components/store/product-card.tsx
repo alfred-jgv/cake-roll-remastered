@@ -1,7 +1,8 @@
+
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { formatPHP } from "@/lib/format";
-import { Skeleton } from "@/components/ui/skeleton";
 
 type ProductCardProps = {
     name: string;
@@ -26,11 +27,19 @@ export function ProductCard({
         <article className="group">
             <Link href={`/products/${slug}`} className="block">
                 <div className="relative aspect-4/5 overflow-hidden bg-muted">
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                        <Skeleton className="size-16 rounded-full" />
-                        <Skeleton className="h-4 w-28" />
-                        <Skeleton className="h-3 w-20" />
-                    </div>
+                    {imagePath ? (
+                        <Image
+                            src={imagePath}
+                            alt={imageAlt}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                    ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground">
+                            Image coming soon
+                        </div>
+                    )}
                 </div>
 
                 <div className="flex items-start justify-between gap-3 pt-4">
