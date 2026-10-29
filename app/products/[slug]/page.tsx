@@ -1,10 +1,8 @@
-
 import { Suspense } from "react";
 import {
     ProductDetailsContent,
     ProductDetailsSkeleton,
 } from "@/components/store/product-details-content";
-import ProductVariantSelector from "@/components/store/product-variant-selector";
 
 type ProductPageProps = {
     params: Promise<{ slug: string }>;

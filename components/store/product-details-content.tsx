@@ -1,9 +1,9 @@
-
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/lib/products";
 import { formatPHP } from "@/lib/format";
 import { Skeleton } from "@/components/ui/skeleton";
+import ProductVariantSelector from "@/components/store/product-variant-selector";
 
 type ProductDetailsContentProps = {
     slug: string;
@@ -70,28 +70,22 @@ export async function ProductDetailsContent({
                         </p>
                     </div>
 
-                    {availableVariants.length > 0 && (
-                        <div className="mt-8 w-full">
-                            <h2 className="mb-3 text-sm font-medium">
-                                Available options
-                            </h2>
-
-                            <div className="space-y-2">
-                                {availableVariants.map((variant) => (
-                                    <div
-                                        key={variant.id}
-                                        className="flex items-center justify-between border px-4 py-3"
-                                    >
-                                        <span className="text-sm">
-                                            {variant.label}
-                                        </span>
-                                        <span className="text-sm font-medium">
-                                            {formatPHP(variant.price)}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                    {availableVariants.length > 0 ? (
+                        <ProductVariantSelector
+                            productId={product.id}
+                            productSlug={product.slug}
+                            productName={product.name}
+                            variants={availableVariants.map((variant) => ({
+                                id: variant.id,
+                                label: variant.label,
+                                price: variant.price,
+                            }))}
+                            basePrice={product.basePrice}
+                        />
+                    ) : (
+                        <p className="mt-8 text-2xl font-medium">
+                            {formatPHP(product.basePrice)}
+                        </p>
                     )}
 
                     <p className="mt-8 text-sm text-muted-foreground">

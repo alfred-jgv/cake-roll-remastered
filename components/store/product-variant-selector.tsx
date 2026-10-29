@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { formatPHP } from "@/lib/format";
+import { useCart } from "@/components/store/cart-provider";
 
 type Variant = {
     id: string;
@@ -10,23 +11,44 @@ type Variant = {
 };
 
 type ProductVariantSelectorProps = {
+    productId: string;
+    productSlug: string;
+    productName: string;
     variants: Variant[];
     basePrice: number;
 };
 
 export default function ProductVariantSelector({
+    productId,
+    productSlug,
+    productName,
     variants,
     basePrice,
 }: ProductVariantSelectorProps) {
     const [selectedVariantId, setSelectedVariantId] = useState(
         variants[0]?.id ?? "",
     );
+    const [added, setAdded] = useState(false);
+    const { addItem } = useCart();
 
     const selectedVariant = variants.find(
         (variant) => variant.id === selectedVariantId,
     );
 
     const price = selectedVariant?.price ?? basePrice;
+
+    function handleAddToCart() {
+        addItem({
+            productId,
+            variantId: selectedVariant?.id ?? null,
+            slug: productSlug,
+            name: productName,
+            variantLabel: selectedVariant?.label ?? "Standard",
+            unitPrice: price,
+        });
+
+        setAdded(true);
+    }
 
     return (
         <div className="mt-8 w-full space-y-4">
@@ -42,9 +64,10 @@ export default function ProductVariantSelector({
                                 <button
                                     key={variant.id}
                                     type="button"
-                                    onClick={() =>
-                                        setSelectedVariantId(variant.id)
-                                    }
+                                    onClick={() => {
+                                        setSelectedVariantId(variant.id);
+                                        setAdded(false);
+                                    }}
                                     aria-pressed={isSelected}
                                     className={`flex w-full items-center justify-between border px-4 py-3 text-left transition-colors ${
                                         isSelected
@@ -55,7 +78,6 @@ export default function ProductVariantSelector({
                                     <span className="text-sm">
                                         {variant.label}
                                     </span>
-
                                     <span className="text-sm font-medium">
                                         {formatPHP(variant.price)}
                                     </span>
@@ -76,6 +98,20 @@ export default function ProductVariantSelector({
                     {formatPHP(price)}
                 </p>
             </div>
+
+            <button
+                type="button"
+                onClick={handleAddToCart}
+                className="w-full bg-primary px-6 py-3 font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            >
+                Add to Cart
+            </button>
+
+            {added && (
+                <p role="status" className="text-sm text-muted-foreground">
+                    Added to cart.
+                </p>
+            )}
         </div>
     );
 }

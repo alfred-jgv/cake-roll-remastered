@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/store/navbar";
+import StoreProviders from "@/components/store/store-providers";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -23,16 +24,20 @@ export const metadata: Metadata = {
     description: "Mobile-first cakes and roll cakes, made to order.",
 };
 
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
         <html
             lang="en"
             className={`${geistSans.variable} ${geistMono.variable} ${lora.variable} h-full antialiased`}
         >
-            <body className="flex min-h-full flex-col">
-                <Navbar />
-                {children}
+            <body className="min-h-full">
+                <StoreProviders>
+                    <Navbar />
+                    {children}
+                </StoreProviders>
             </body>
         </html>
     );
 }
+
