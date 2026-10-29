@@ -1,10 +1,13 @@
+
 import dotenv from "dotenv";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../generated/prisma/client";
 import { seedCategories, seedProducts } from "./seed-data/catalog";
 
 dotenv.config({ path: ".env.local" });
-const connectionString = process.env.DIRECT_URL ?? process.env.DATABASE_URL;
+
+const connectionString =
+    process.env.DIRECT_URL ?? process.env.DATABASE_URL;
 
 if (!connectionString) {
     throw new Error("Set DIRECT_URL or DATABASE_URL before running the seed.");
@@ -55,6 +58,11 @@ async function main() {
             },
         });
 
+        // Remove old image records, including outdated .webp paths.
+        await prisma.productImage.deleteMany({
+            where: { productId: saved.id },
+        });
+
         for (const variant of product.variants) {
             await prisma.productVariant.upsert({
                 where: {
@@ -79,43 +87,34 @@ async function main() {
         }
 
         for (const image of product.images) {
-            const existing = await prisma.productImage.findFirst({
-                where: { productId: saved.id, path: image.path },
+            await prisma.productImage.create({
+                data: {
+                    productId: saved.id,
+                    path: image.path,
+                    alt: image.alt,
+                    sortOrder: image.sortOrder,
+                },
             });
-
-            if (existing) {
-                await prisma.productImage.update({
-                    where: { id: existing.id },
-                    data: { alt: image.alt, sortOrder: image.sortOrder },
-                });
-            } else {
-                await prisma.productImage.create({
-                    data: {
-                        productId: saved.id,
-                        path: image.path,
-                        alt: image.alt,
-                        sortOrder: image.sortOrder,
-                    },
-                });
-            }
         }
     }
 
-    const [categoryCount, productCount, variantCount] = await Promise.all([
-        prisma.category.count(),
-        prisma.product.count(),
-        prisma.productVariant.count(),
-    ]);
+    const [categoryCount, productCount, variantCount, imageCount] =
+        await Promise.all([
+            prisma.category.count(),
+            prisma.product.count(),
+            prisma.productVariant.count(),
+            prisma.productImage.count(),
+        ]);
 
     console.log(
-        `Seed complete: ${categoryCount} categories, ${productCount} products, ${variantCount} variants.`,
+        `Seed complete: ${categoryCount} categories, ${productCount} products, ${variantCount} variants, ${imageCount} images.`,
     );
 }
 
 main()
     .catch((error) => {
         console.error(error);
-        process.exit(1);
+        process.exitCode = 1;
     })
     .finally(async () => {
         await prisma.$disconnect();
