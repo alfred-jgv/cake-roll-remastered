@@ -4,6 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { Suspense } from "react";
 import { HomepageContent, HomepageContentSkeleton } from "@/components/store/homepage-content";
 
+export const instant = false;
+
 export default function Home() {
     return (
         <main className="flex-1">

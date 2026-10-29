@@ -4,6 +4,8 @@ import {
     ProductDetailsSkeleton,
 } from "@/components/store/product-details-content";
 
+export const instant = false;
+
 type ProductPageProps = {
     params: Promise<{ slug: string }>;
 };

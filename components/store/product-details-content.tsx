@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProductBySlug } from "@/lib/products";
+import { getProductBySlug } from "@/features/products/data/products";
 import { formatPHP } from "@/lib/format";
 import { Skeleton } from "@/components/ui/skeleton";
 import ProductVariantSelector from "@/components/store/product-variant-selector";
