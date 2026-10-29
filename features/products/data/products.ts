@@ -1,3 +1,5 @@
+"server-only";
+
 import { prisma } from "@/lib/prisma";
 import { cacheLife, cacheTag } from "next/cache";
 

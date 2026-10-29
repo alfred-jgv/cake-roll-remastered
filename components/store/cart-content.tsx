@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useCart } from "@/components/store/cart-provider";
+import { useCart } from "@/features/cart/hooks/use-cart";
 import { formatPHP } from "@/lib/format";
 
 export function CartContent() {

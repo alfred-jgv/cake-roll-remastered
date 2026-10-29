@@ -1,9 +1,10 @@
-
 import { Suspense } from "react";
 import {
     CartContent,
     CartSkeleton,
 } from "@/components/store/cart-content";
+
+export const instant = false;
 
 export default function CartPage() {
     return (

@@ -4,6 +4,8 @@ import {
     ProductsContentSkeleton,
 } from "@/components/store/products-content";
 
+export const instant = false;
+
 type ProductsPageProps = {
     searchParams: Promise<{
         category?: string;

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { formatPHP } from "@/lib/format";
-import { useCart } from "@/components/store/cart-provider";
+import { useCart } from "@/features/cart/hooks/use-cart";
 
 type Variant = {
     id: string;
