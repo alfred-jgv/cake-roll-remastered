@@ -1,24 +1,12 @@
-
 "use client";
 
-import {
-    useCallback,
-    useState,
-    type ReactNode,
-} from "react";
+import { useCallback, useState, type ReactNode } from "react";
 
 import { CartContext } from "@/features/cart/context/cart-context";
 import { useCartPersistence } from "@/features/cart/hooks/use-cart-persistence";
-import type {
-    AddToCartItem,
-    CartItem,
-} from "@/features/cart/types/cart.types";
+import type { AddToCartItem, CartItem } from "@/features/cart/types/cart.types";
 
-export function CartProvider({
-    children,
-}: {
-    children: ReactNode;
-}) {
+export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
     const { isLoaded } = useCartPersistence(items, setItems);
 
@@ -60,17 +48,12 @@ export function CartProvider({
     );
 
     const updateQuantity = useCallback(
-        (
-            productId: string,
-            variantId: string | null,
-            quantity: number,
-        ) => {
+        (productId: string, variantId: string | null, quantity: number) => {
             if (quantity < 1) return;
 
             setItems((currentItems) =>
                 currentItems.map((item) =>
-                    item.productId === productId &&
-                    item.variantId === variantId
+                    item.productId === productId && item.variantId === variantId
                         ? { ...item, quantity }
                         : item,
                 ),
@@ -78,6 +61,10 @@ export function CartProvider({
         },
         [],
     );
+
+    const clearCart = useCallback(() => {
+        setItems([]);
+    }, []);
 
     return (
         <CartContext.Provider
@@ -87,6 +74,7 @@ export function CartProvider({
                 addItem,
                 removeItem,
                 updateQuantity,
+                clearCart,
             }}
         >
             {children}
