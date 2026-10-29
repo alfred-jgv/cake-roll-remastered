@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none">
+  <rect width="640" height="480" fill="#FBEAF1"/>
+  <path d="M160 300c40-70 110-105 160-105s120 35 160 105" stroke="#E35D8C" stroke-width="18" stroke-linecap="round"/>
+  <path d="M210 230c24-24 62-36 110-36s86 12 110 36" stroke="#E35D8C" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="320" cy="168" r="18" fill="#E35D8C"/>
+  <text x="320" y="390" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#9A3B62">Cake n Roll</text>
+</svg>

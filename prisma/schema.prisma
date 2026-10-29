@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum FulfillmentType {
+  PICKUP
+  DELIVERY
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum OrderPaymentStatus {
+  UNPAID
+  PENDING
+  PAID
+  FAILED
+  EXPIRED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  EXPIRED
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  description String?
+  imagePath   String?
+  sortOrder   Int       @default(0)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id           String           @id @default(cuid())
+  slug         String           @unique
+  name         String
+  description  String
+  basePrice    Int
+  leadTimeDays Int              @default(1)
+  isFeatured   Boolean          @default(false)
+  isAvailable  Boolean          @default(true)
+  categoryId   String
+  category     Category         @relation(fields: [categoryId], references: [id])
+  variants     ProductVariant[]
+  images       ProductImage[]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}
+
+model ProductVariant {
+  id          String      @id @default(cuid())
+  productId   String
+  product     Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  label       String
+  price       Int
+  isAvailable Boolean     @default(true)
+  sortOrder   Int         @default(0)
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@unique([productId, label])
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  path      String
+  alt       String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id              String             @id @default(cuid())
+  reference       String             @unique
+  customerName    String
+  phone           String
+  email           String?
+  fulfillmentType FulfillmentType
+  deliveryAddress String?
+  scheduledFor    DateTime
+  notes           String?
+  subtotal        Int
+  deliveryFee     Int
+  total           Int
+  status          OrderStatus        @default(PENDING)
+  paymentStatus   OrderPaymentStatus @default(UNPAID)
+  items           OrderItem[]
+  payments        Payment[]
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+}
+
+model OrderItem {
+  id             String         @id @default(cuid())
+  orderId        String
+  order          Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variantId      String
+  variant        ProductVariant @relation(fields: [variantId], references: [id])
+  productName    String
+  variantLabel   String
+  unitPrice      Int
+  quantity       Int
+  lineTotal      Int
+  customization  String?
+}
+
+model Payment {
+  id                String        @id @default(cuid())
+  orderId           String
+  order             Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  provider          String        @default("PAYMONGO")
+  providerSessionId String        @unique
+  providerPaymentId String?
+  amount            Int
+  currency          String        @default("PHP")
+  status            PaymentStatus @default(PENDING)
+  paidAt            DateTime?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+}
+
+model WebhookEvent {
+  id        String   @id @default(cuid())
+  eventId   String   @unique
+  source    String   @default("PAYMONGO")
+  createdAt DateTime @default(now())
+}
