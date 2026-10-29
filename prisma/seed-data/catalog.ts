@@ -36,21 +36,21 @@ export const seedCategories: SeedCategory[] = [
         slug: "roll-cakes",
         name: "Roll cakes",
         description: "Soft sponge rolls with Filipino-inspired fillings.",
-        imagePath: "categories/roll-cakes.webp",
+        imagePath: "",
         sortOrder: 1,
     },
     {
         slug: "celebration-cakes",
         name: "Celebration cakes",
         description: "Layered cakes for birthdays and gatherings.",
-        imagePath: "categories/celebration-cakes.webp",
+        imagePath: "",
         sortOrder: 2,
     },
     {
         slug: "slices-and-bites",
         name: "Slices and bites",
         description: "Smaller treats when you want just a taste.",
-        imagePath: "categories/slices-and-bites.webp",
+        imagePath: "",
         sortOrder: 3,
     },
 ];
@@ -73,8 +73,8 @@ export const seedProducts: SeedProduct[] = [
         ],
         images: [
             {
-                path: "products/ube-roll/01-whole.webp",
-                alt: "Whole ube roll cake",
+                path: "ube-roll.png",
+                alt: "Ube roll cake",
                 sortOrder: 1,
             },
         ],
@@ -95,7 +95,7 @@ export const seedProducts: SeedProduct[] = [
         ],
         images: [
             {
-                path: "products/chocolate-ganache-roll/01-whole.webp",
+                path: "chocolate-ganache-roll.png",
                 alt: "Chocolate ganache roll cake",
                 sortOrder: 1,
             },
@@ -115,13 +115,7 @@ export const seedProducts: SeedProduct[] = [
             { label: "Whole roll", price: 52000, sortOrder: 1 },
             { label: "Slice", price: 9500, sortOrder: 2 },
         ],
-        images: [
-            {
-                path: "products/mango-cream-roll/01-whole.webp",
-                alt: "Mango cream roll cake",
-                sortOrder: 1,
-            },
-        ],
+        images: [],
     },
     {
         slug: "caramel-sans-rival",
@@ -137,13 +131,7 @@ export const seedProducts: SeedProduct[] = [
             { label: "8-inch", price: 78000, sortOrder: 1 },
             { label: "Slice", price: 14500, sortOrder: 2 },
         ],
-        images: [
-            {
-                path: "products/caramel-sans-rival/01-whole.webp",
-                alt: "Caramel sans rival cake",
-                sortOrder: 1,
-            },
-        ],
+        images: [],
     },
     {
         slug: "strawberry-shortcake",
@@ -162,7 +150,7 @@ export const seedProducts: SeedProduct[] = [
         ],
         images: [
             {
-                path: "products/strawberry-shortcake/01-whole.webp",
+                path: "strawberry-shortcake.png",
                 alt: "Strawberry shortcake",
                 sortOrder: 1,
             },
@@ -182,13 +170,7 @@ export const seedProducts: SeedProduct[] = [
             { label: "Whole cake", price: 58000, sortOrder: 1 },
             { label: "Slice", price: 10500, sortOrder: 2 },
         ],
-        images: [
-            {
-                path: "products/mocha-chiffon/01-whole.webp",
-                alt: "Mocha chiffon cake",
-                sortOrder: 1,
-            },
-        ],
+        images: [],
     },
     {
         slug: "yema-cake",
@@ -204,13 +186,7 @@ export const seedProducts: SeedProduct[] = [
             { label: "6-inch", price: 42000, sortOrder: 1 },
             { label: "8-inch", price: 56000, sortOrder: 2 },
         ],
-        images: [
-            {
-                path: "products/yema-cake/01-whole.webp",
-                alt: "Yema cake",
-                sortOrder: 1,
-            },
-        ],
+        images: [],
     },
     {
         slug: "chocolate-crinkles-box",
@@ -222,13 +198,9 @@ export const seedProducts: SeedProduct[] = [
         isFeatured: false,
         isAvailable: true,
         categorySlug: "slices-and-bites",
-        variants: [{ label: "Box of 12", price: 28000, sortOrder: 1 }],
-        images: [
-            {
-                path: "products/chocolate-crinkles-box/01-box.webp",
-                alt: "Box of chocolate crinkles",
-                sortOrder: 1,
-            },
+        variants: [
+            { label: "Box of 12", price: 28000, sortOrder: 1 },
         ],
+        images: [],
     },
 ];
