@@ -84,7 +84,11 @@ export async function ProductsContent({ categorySlug }: ProductsContentProps) {
                                     name={product.name}
                                     slug={product.slug}
                                     description={product.description}
-                                    imagePath={null}
+                                    imagePath={
+                                        product.images[0]?.path
+                                            ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/product-image/${product.images[0].path}`
+                                            : null
+                                    }
                                     imageAlt={
                                         product.images[0]?.alt ?? product.name
                                     }

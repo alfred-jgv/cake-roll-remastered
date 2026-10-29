@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ProductCard } from "@/components/store/product-card";
@@ -74,7 +73,11 @@ async function HomepageContent() {
                                     name={product.name}
                                     slug={product.slug}
                                     description={product.description}
-                                    imagePath={null}
+                                    imagePath={
+                                        product.images[0]?.path
+                                            ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/product-image/${product.images[0].path}`
+                                            : null
+                                    }
                                     imageAlt={
                                         product.images[0]?.alt ?? product.name
                                     }
