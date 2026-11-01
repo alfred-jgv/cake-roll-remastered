@@ -19,7 +19,7 @@ export function useCartPersistence(
                 const parsed: unknown = JSON.parse(stored);
 
                 if (Array.isArray(parsed)) {
-                    setItems(parsed);
+                    setItems(parsed as CartItem[]);
                 }
             }
         } catch {
@@ -30,9 +30,9 @@ export function useCartPersistence(
     }, [setItems]);
 
     useEffect(() => {
-        if (isLoaded) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-        }
+        if (!isLoaded) return;
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     }, [items, isLoaded]);
 
     return { isLoaded };

@@ -20,4 +20,5 @@ export type CartContextValue = {
         variantId: string | null,
         quantity: number,
     ) => void;
+    clearCart: () => void;
 };

@@ -152,13 +152,12 @@ export function CartContent() {
                                 confirmed during checkout.
                             </p>
 
-                            <button
-                                type="button"
-                                disabled
-                                className="mt-6 w-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground opacity-50"
+                            <Link
+                                href="/checkout"
+                                className="mt-6 block w-full bg-primary px-6 py-3 text-center text-sm font-medium text-primary-foreground hover:opacity-90"
                             >
-                                Checkout Coming Soon
-                            </button>
+                                Proceed to Checkout
+                            </Link>
                         </aside>
                     </div>
                 )}
