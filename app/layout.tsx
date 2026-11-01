@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/store/navbar";
 import StoreProviders from "@/components/store/store-providers";
+import { Footer } from "@/components/store/footer";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -23,6 +24,9 @@ const lora = Lora({
 export const metadata: Metadata = {
     title: "Cake n Roll",
     description: "Mobile-first cakes and roll cakes, made to order.",
+    icons: {
+        icon: "/brand/cake-n-roll-logo.ico",
+    },
 };
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
@@ -34,6 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <StoreProviders>
                     <Navbar />
                     {children}
+                    <Footer />
                 </StoreProviders>
             </body>
         </html>

@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { Search, ShoppingBag } from "lucide-react";
+import Image from "next/image";
+import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/store/mobile-nav";
+import { CartButton } from "@/components/store/cart-button";
 
 const navigation = [
     { label: "Home", href: "/" },
@@ -18,10 +20,19 @@ export function Navbar() {
             >
                 <Link
                     href="/"
-                    className="font-heading text-xl font-semibold tracking-tight"
+                    className="flex items-center gap-2"
                     aria-label="Cake n Roll home"
                 >
-                    cake n roll<span className="text-primary">.</span>
+                    <Image
+                        src="/brand/cake-n-roll-logo-2.svg"
+                        alt="Cake n Roll"
+                        width={42}
+                        height={42}
+                        priority
+                    />
+                    <span className="font-heading text-xl font-semibold tracking-tight">
+                        cake n roll<span className="text-primary">.</span>
+                    </span>
                 </Link>
 
                 <div className="hidden items-center gap-8 md:flex">
@@ -47,15 +58,7 @@ export function Navbar() {
                         </Link>
                     </Button>
 
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label="Shopping bag"
-                    >
-                        <Link href="/cart">
-                            <ShoppingBag className="size-5" />
-                        </Link>
-                    </Button>
+                    <CartButton />
 
                     <MobileNav />
                 </div>

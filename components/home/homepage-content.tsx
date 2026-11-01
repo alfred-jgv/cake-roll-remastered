@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { ProductCard } from "@/components/product/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getHomepageData } from "@/features/products/data/get-homepage-data";
+import { getProductImageUrl } from "@/lib/supabase/storage";
 
 async function HomepageContent() {
     const { categories, products } = await getHomepageData();
@@ -73,11 +74,9 @@ async function HomepageContent() {
                                     name={product.name}
                                     slug={product.slug}
                                     description={product.description}
-                                    imagePath={
-                                        product.images[0]?.path
-                                            ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/product-image/${product.images[0].path}`
-                                            : null
-                                    }
+                                    imagePath={getProductImageUrl(
+                                        product.images[0]?.path,
+                                    )}
                                     imageAlt={
                                         product.images[0]?.alt ?? product.name
                                     }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getProductsData } from "@/features/products/data/products";
 import { ProductCard } from "@/components/product/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getProductImageUrl } from "@/lib/supabase/storage";
 
 type ProductsContentProps = {
     categorySlug?: string;
@@ -84,11 +85,9 @@ export async function ProductsContent({ categorySlug }: ProductsContentProps) {
                                     name={product.name}
                                     slug={product.slug}
                                     description={product.description}
-                                    imagePath={
-                                        product.images[0]?.path
-                                            ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/product-image/${product.images[0].path}`
-                                            : null
-                                    }
+                                    imagePath={getProductImageUrl(
+                                        product.images[0]?.path,
+                                    )}
                                     imageAlt={
                                         product.images[0]?.alt ?? product.name
                                     }
