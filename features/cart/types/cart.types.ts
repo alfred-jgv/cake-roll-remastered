@@ -3,6 +3,7 @@ export type CartItem = {
     variantId: string | null;
     slug: string;
     name: string;
+    imagePath: string;
     variantLabel: string;
     unitPrice: number;
     quantity: number;

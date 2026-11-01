@@ -78,6 +78,9 @@ export async function ProductDetailsContent({
                             productId={product.id}
                             productSlug={product.slug}
                             productName={product.name}
+                            imagePath={getProductImageUrl(
+                                product.images[0]?.path,
+                            )}
                             variants={availableVariants.map((variant) => ({
                                 id: variant.id,
                                 label: variant.label,

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Suspense } from "react";
 import {
@@ -34,16 +35,15 @@ export default function Home() {
                     </Link>
                 </div>
 
-                <div className="flex min-h-72 items-center justify-center bg-muted px-6 py-12 md:min-h-full">
-                    <div className="max-w-sm text-center">
-                        <p className="font-heading text-3xl sm:text-4xl">
-                            Made to make moments sweeter.
-                        </p>
-                        <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                            Thoughtful treats for sharing, gifting, and
-                            celebrating.
-                        </p>
-                    </div>
+                <div className="relative min-h-72 overflow-hidden bg-muted md:min-h-full">
+                    <Image
+                        src="/images/hero-image.png"
+                        alt="A selection of Cake n Roll desserts"
+                        fill
+                        priority
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="object-cover"
+                    />
                 </div>
             </section>
 
