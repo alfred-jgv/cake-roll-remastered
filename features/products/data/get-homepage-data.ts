@@ -1,8 +1,14 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
+import { cacheLife, cacheTag } from "next/cache";
 
 export async function getHomepageData() {
+    "use cache";
+
+    cacheLife("hours");
+    cacheTag("products");
+
     const [categories, products] = await Promise.all([
         prisma.category.findMany({
             orderBy: { sortOrder: "asc" },

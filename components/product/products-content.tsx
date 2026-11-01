@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getProductsData } from "@/features/products/data/products";
-import { ProductCard } from "@/components/store/product-card";
+import { ProductCard } from "@/components/product/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 type ProductsContentProps = {
