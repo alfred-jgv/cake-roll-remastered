@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getProductsData } from "@/features/products/data/products";
-import { ProductCard } from "@/components/store/product-card";
+import { ProductCard } from "@/components/product/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 type ProductsContentProps = {
@@ -84,7 +84,7 @@ export async function ProductsContent({ categorySlug }: ProductsContentProps) {
                                     name={product.name}
                                     slug={product.slug}
                                     description={product.description}
-                                    imagePath={null}
+                                    imagePath={product.images[0]?.path}
                                     imageAlt={
                                         product.images[0]?.alt ?? product.name
                                     }

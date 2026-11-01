@@ -1,7 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { formatPHP } from "@/lib/format";
-import { Skeleton } from "@/components/ui/skeleton";
+import { getProductImageUrl } from "@/lib/supabase/storage";
 
 type ProductCardProps = {
     name: string;
@@ -26,11 +27,13 @@ export function ProductCard({
         <article className="group">
             <Link href={`/products/${slug}`} className="block">
                 <div className="relative aspect-4/5 overflow-hidden bg-muted">
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                        <Skeleton className="size-16 rounded-full" />
-                        <Skeleton className="h-4 w-28" />
-                        <Skeleton className="h-3 w-20" />
-                    </div>
+                    <Image
+                        src={getProductImageUrl(imagePath)}
+                        alt={imageAlt}
+                        fill
+                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 50vw"
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
                 </div>
 
                 <div className="flex items-start justify-between gap-3 pt-4">

@@ -1,10 +1,10 @@
-
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Suspense } from "react";
-import { HomepageContent, HomepageContentSkeleton } from "@/components/store/homepage-content";
-
-export const instant = false;
+import {
+    HomepageContent,
+    HomepageContentSkeleton,
+} from "@/components/home/homepage-content";
 
 export default function Home() {
     return (

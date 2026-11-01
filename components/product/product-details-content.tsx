@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/features/products/data/products";
 import { formatPHP } from "@/lib/format";
 import { Skeleton } from "@/components/ui/skeleton";
-import ProductVariantSelector from "@/components/store/product-variant-selector";
+import ProductVariantSelector from "@/components/product/product-variant-selector";
+import { getProductImageUrl } from "@/lib/supabase/storage";
 
 type ProductDetailsContentProps = {
     slug: string;
@@ -25,13 +27,14 @@ export async function ProductDetailsContent({
     return (
         <main className="flex-1">
             <section className="mx-auto grid max-w-7xl gap-10 px-6 py-12 sm:px-10 md:grid-cols-2 lg:px-8">
-                <div className="flex aspect-4/5 items-center justify-center bg-muted">
-                    <div className="space-y-3 text-center">
-                        <div className="mx-auto size-16 rounded-full bg-background" />
-                        <p className="text-sm text-muted-foreground">
-                            Product image coming soon
-                        </p>
-                    </div>
+                <div className="relative aspect-4/5 overflow-hidden bg-muted">
+                    <Image
+                        src={getProductImageUrl(product.images[0]?.path)}
+                        alt={product.images[0]?.alt ?? product.name}
+                        fill
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="object-cover"
+                    />
                 </div>
 
                 <div className="flex flex-col items-start py-2">

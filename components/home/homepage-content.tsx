@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ProductCard } from "@/components/store/product-card";
+import { ProductCard } from "@/components/product/product-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getHomepageData } from "@/features/products/data/get-homepage-data";
 
@@ -74,7 +74,7 @@ async function HomepageContent() {
                                     name={product.name}
                                     slug={product.slug}
                                     description={product.description}
-                                    imagePath={null}
+                                    imagePath={product.images[0]?.path}
                                     imageAlt={
                                         product.images[0]?.alt ?? product.name
                                     }

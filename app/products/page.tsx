@@ -2,9 +2,7 @@ import { Suspense } from "react";
 import {
     ProductsContent,
     ProductsContentSkeleton,
-} from "@/components/store/products-content";
-
-export const instant = false;
+} from "@/components/product/products-content";
 
 type ProductsPageProps = {
     searchParams: Promise<{

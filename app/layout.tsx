@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Geist, Geist_Mono, Lora } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/store/navbar";
@@ -23,9 +24,7 @@ export const metadata: Metadata = {
     title: "Cake n Roll",
     description: "Mobile-first cakes and roll cakes, made to order.",
 };
-
-
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html
             lang="en"
@@ -40,4 +39,3 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </html>
     );
 }
-
