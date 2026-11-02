@@ -1,9 +1,11 @@
+
 import "server-only";
 
+import { connection } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { cacheLife, cacheTag } from "next/cache";
 
-export async function getHomepageData() {
+async function getCachedHomepageData() {
     "use cache";
 
     cacheLife("hours");
@@ -37,4 +39,10 @@ export async function getHomepageData() {
     ]);
 
     return { categories, products };
+}
+
+export async function getHomepageData() {
+    await connection();
+
+    return getCachedHomepageData();
 }
