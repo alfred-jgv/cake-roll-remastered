@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { formatPHP } from "@/lib/format";
@@ -54,34 +55,49 @@ export function CartContent() {
                                     key={`${item.productId}-${item.variantId ?? "standard"}`}
                                     className="flex flex-col gap-5 border-t py-6 sm:flex-row sm:items-start sm:justify-between"
                                 >
-                                    <div className="space-y-2">
-                                        <Link
-                                            href={`/products/${item.slug}`}
-                                            className="font-medium hover:underline"
-                                        >
-                                            {item.name}
-                                        </Link>
+                                    <div className="flex gap-4">
+                                        <div className="relative size-24 shrink-0 overflow-hidden rounded-md bg-muted">
+                                            <Image
+                                                src={
+                                                    item.imagePath ||
+                                                    "/images/placeholders/cake-placeholder.svg"
+                                                }
+                                                alt={item.name}
+                                                fill
+                                                sizes="96px"
+                                                className="object-cover"
+                                            />
+                                        </div>
 
-                                        <p className="text-sm text-muted-foreground">
-                                            {item.variantLabel}
-                                        </p>
+                                        <div className="space-y-2">
+                                            <Link
+                                                href={`/products/${item.slug}`}
+                                                className="font-medium hover:underline"
+                                            >
+                                                {item.name}
+                                            </Link>
 
-                                        <p className="text-sm">
-                                            {formatPHP(item.unitPrice)} each
-                                        </p>
+                                            <p className="text-sm text-muted-foreground">
+                                                {item.variantLabel}
+                                            </p>
 
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                removeItem(
-                                                    item.productId,
-                                                    item.variantId,
-                                                )
-                                            }
-                                            className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
-                                        >
-                                            Remove
-                                        </button>
+                                            <p className="text-sm">
+                                                {formatPHP(item.unitPrice)} each
+                                            </p>
+
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    removeItem(
+                                                        item.productId,
+                                                        item.variantId,
+                                                    )
+                                                }
+                                                className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
                                     </div>
 
                                     <div className="flex items-center justify-between gap-6 sm:flex-col sm:items-end">

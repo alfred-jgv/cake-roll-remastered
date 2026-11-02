@@ -115,7 +115,13 @@ export const seedProducts: SeedProduct[] = [
             { label: "Whole roll", price: 52000, sortOrder: 1 },
             { label: "Slice", price: 9500, sortOrder: 2 },
         ],
-        images: [],
+        images: [
+            {
+                path: "mango-cream-roll.webp",
+                alt: "Mango cream roll",
+                sortOrder: 1,
+            }
+        ],
     },
     {
         slug: "caramel-sans-rival",
@@ -131,7 +137,13 @@ export const seedProducts: SeedProduct[] = [
             { label: "8-inch", price: 78000, sortOrder: 1 },
             { label: "Slice", price: 14500, sortOrder: 2 },
         ],
-        images: [],
+        images: [
+            {
+                path: "caramel-sans-rival.webp",
+                alt: "Caramel sans rival",
+                sortOrder: 1,
+            }
+        ],
     },
     {
         slug: "strawberry-shortcake",
@@ -170,7 +182,13 @@ export const seedProducts: SeedProduct[] = [
             { label: "Whole cake", price: 58000, sortOrder: 1 },
             { label: "Slice", price: 10500, sortOrder: 2 },
         ],
-        images: [],
+        images: [
+            {
+                path: "mocha-chiffon.webp",
+                alt: "Mocha chiffon",
+                sortOrder: 1,
+            }
+        ],
     },
     {
         slug: "yema-cake",
@@ -186,7 +204,13 @@ export const seedProducts: SeedProduct[] = [
             { label: "6-inch", price: 42000, sortOrder: 1 },
             { label: "8-inch", price: 56000, sortOrder: 2 },
         ],
-        images: [],
+        images: [
+            {
+                path: "yema-cake.webp",
+                alt: "Yema cake",
+                sortOrder: 1,
+            }
+        ],
     },
     {
         slug: "chocolate-crinkles-box",
@@ -201,6 +225,12 @@ export const seedProducts: SeedProduct[] = [
         variants: [
             { label: "Box of 12", price: 28000, sortOrder: 1 },
         ],
-        images: [],
+        images: [
+            {
+                path: "chocolate-crinkles-box.webp",
+                alt: "Chocolate crinkles box",
+                sortOrder: 1,
+            }
+        ],
     },
 ];

@@ -2,6 +2,8 @@
 
 A mobile-first cake e-commerce web application built with Next.js, TypeScript, Prisma, and Supabase. Cake n Roll allows customers to browse cakes, explore product variants, manage a shopping cart, and place orders through a responsive storefront.
 
+<img width="1902" height="937" alt="image" src="https://github.com/user-attachments/assets/4dbcd8f4-1fc7-48a8-b9d2-9672edccbce8" />
+
 ## Tech Stack
 
 - **Framework:** Next.js (App Router)

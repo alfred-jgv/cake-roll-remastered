@@ -14,6 +14,7 @@ type ProductVariantSelectorProps = {
     productId: string;
     productSlug: string;
     productName: string;
+    imagePath: string;
     variants: Variant[];
     basePrice: number;
 };
@@ -22,6 +23,7 @@ export default function ProductVariantSelector({
     productId,
     productSlug,
     productName,
+    imagePath,
     variants,
     basePrice,
 }: ProductVariantSelectorProps) {
@@ -43,6 +45,7 @@ export default function ProductVariantSelector({
             variantId: selectedVariant?.id ?? null,
             slug: productSlug,
             name: productName,
+            imagePath,
             variantLabel: selectedVariant?.label ?? "Standard",
             unitPrice: price,
         });
